@@ -1,51 +1,38 @@
 package testpackage;
 
 import java.io.*;
+import java.util.Arrays;
 import java.util.Stack;
-import java.util.StringTokenizer;
 
 public class Test28278 {
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
-    public static void main(String[] args) throws IOException{
-        T28278();
-    }
-    static public void T28278() throws IOException {
-        int n = Integer.parseInt(br.readLine());
+    static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+    public static void main(String[] args) throws IOException {
+        int count = Integer.parseInt(br.readLine());
         Stack<Integer> stack = new Stack<>();
-        for(int i=0;i<n;i++){
-            StringTokenizer st = new StringTokenizer(br.readLine());
-            int a = Integer.parseInt(st.nextToken());
-            switch (a){
-                case 1:
-                    stack.push(Integer.parseInt(st.nextToken()));
-                    break;
-                case 2:
-                    if(stack.isEmpty()||stack.size()==1){
-                    System.out.println(-1);
-                    }else {
-                    System.out.println(stack.pop());
-                    }
-                    break;
-                case 3:
-                    System.out.println(stack.size());
-                    break;
-                case 4:
-                    if (stack.isEmpty()){
-                    System.out.println(1);
-                    }else {
-                        System.out.println(0);
-                    }
-                    break;
-                case 5:
-                    if(stack.isEmpty()){
-                        System.out.println(-1);
-                    }else {
-                        System.out.println(stack.peek());
-                    }
-                    break;
+        for (int i = 0; i < count; i++) {
+            int[] input = Arrays.stream(br.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+            if (input[0] == 1) {
+                stack.push(input[1]);
+            } else {
+                switch (input[0]) {
+                    case 2:
+                        bw.write((stack.isEmpty() ? -1 : stack.pop()) + "\n");
+                        break;
+                    case 3:
+                        bw.write(stack.size() + "\n");
+                        break;
+                    case 4:
+                        bw.write((stack.isEmpty() ? 1 : 0) + "\n");
+                        break;
+                    case 5:
+                        bw.write((stack.isEmpty() ? -1 : stack.peek()) + "\n");
+                        break;
+                }
             }
-        }
+        }   bw.flush();
+            bw.close();
+            br.close();
     }
 }
 
